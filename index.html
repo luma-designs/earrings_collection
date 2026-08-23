@@ -88,16 +88,17 @@
 
         .collection {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            max-width: 900px;
+            grid-template-columns: repeat(auto-fill, 270px);
+            justify-content: center;
+            gap: 35px;
+            max-width: 950px;
             margin: auto;
         }
 
-        .product { text-align: center; }
+        .product { text-align: center; width: 100%; }
 
         .product-card {
-            height: 380px;
+            height: 370px;
             width: 100%;
             background: var(--bg-card);
             border-radius: 180px 180px 20px 20px;
@@ -180,6 +181,7 @@
 
         footer .logo { font-size: 22px; letter-spacing: 5px; margin-bottom: 6px; }
         footer p { font-size: 11px; color: var(--lilac-soft); letter-spacing: 2px; text-transform: uppercase; }
+        footer .author { margin-top: 4px; font-size: 10px; opacity: 0.8; }
     </style>
 </head>
 
@@ -238,7 +240,7 @@
                         <p class="subtitle">Pieza Única</p>
                     </div>
 
-                    <!-- Pieza 3: Hexágono Damero (Nuevo foto 9264) -->
+                    <!-- Pieza 3: Hexágono Damero -->
                     <div class="product" data-id="3">
                         <div class="product-card">
                             <button class="fav-btn" onclick="toggleFav(3)">♥</button>
@@ -258,7 +260,7 @@
                 </div>
 
                 <div class="collection">
-                    <!-- Pieza 4: Marmolado Azul (Nuevo foto 9265) -->
+                    <!-- Pieza 4: Marmolado Azul -->
                     <div class="product" data-id="4">
                         <div class="product-card">
                             <button class="fav-btn" onclick="toggleFav(4)">♥</button>
@@ -304,6 +306,7 @@
     <footer>
         <div class="logo">LUMA</div>
         <p>Modelado Artesanal</p>
+        <p class="author">Diseño & Creación por Irene Fernández</p>
     </footer>
 
     <script>
