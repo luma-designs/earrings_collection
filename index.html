@@ -13,18 +13,18 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --bg-main: #fbf8fc;
-            --bg-card: #f3ecf7;
-            --bg-card-hover: #eadef2;
-            --surface-glass: rgba(251, 248, 252, 0.95);
-            --ink: #2a2230;
+            --bg-main: #f3ecf7;                  /* Fondo general lila/lavanda suave */
+            --bg-card: #ffffff;                  /* Tarjetas en blanco puro para máximo contraste */
+            --bg-card-hover: #faf6fc;
+            --surface-header: #2a2230;            /* Cabecera oscura elegante */
+            --ink: #2a2230;                      /* Texto principal profundo */
             --ink-muted: #6e6275;
-            --lilac-accent: #8b68aa;
+            --lilac-accent: #8b68aa;             /* Lila vibrante para acentos y líneas */
             --lilac-soft: #cdb9e3;
-            --blue-accent: #4a90e2;
-            --green-accent: #55a669;
-            --border-subtle: rgba(139, 104, 170, 0.15);
-            --shadow-hover: 0 15px 35px rgba(139, 104, 170, 0.15);
+            --blue-accent: #3b7ad0;              /* Azul definido */
+            --green-accent: #48935a;             /* Verde definido */
+            --border-subtle: rgba(139, 104, 170, 0.25); /* Líneas divisoras más claras */
+            --shadow-hover: 0 15px 35px rgba(139, 104, 170, 0.2);
         }
 
         html { scroll-behavior: smooth; }
@@ -39,63 +39,80 @@
 
         h1, h2, h3, .logo { font-family: 'Fraunces', serif; font-weight: 300; }
 
+        /* Cabecera oscura enmarcando la web */
         header {
             min-height: 70px;
             padding: 15px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: var(--surface-glass);
-            backdrop-filter: blur(12px);
+            background-color: var(--surface-header);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid var(--border-subtle);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
-        .logo-wrap { display: flex; align-items: center; gap: 6px; }
-        .logo { font-size: 24px; letter-spacing: 6px; text-transform: uppercase; }
-        .logo-charm { width: 6px; height: 6px; border-radius: 50%; background-color: var(--lilac-accent); }
+        .logo-wrap { display: flex; align-items: center; gap: 8px; }
+        .logo { font-size: 24px; letter-spacing: 6px; text-transform: uppercase; color: #ffffff; }
+        .logo-charm { width: 6px; height: 6px; border-radius: 50%; background-color: var(--lilac-soft); }
 
-        nav { display: flex; gap: 20px; }
-        nav a { text-decoration: none; color: var(--ink-muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+        nav { display: flex; gap: 24px; }
+        nav a { 
+            text-decoration: none; 
+            color: #e5dbe9; 
+            font-size: 12px; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        nav a:hover { color: #ffffff; }
 
+        /* Hero con resplandor/aura lila al fondo */
         .hero {
-            min-height: 35vh;
+            min-height: 38vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
+            background: radial-gradient(circle, rgba(205, 185, 227, 0.45) 0%, rgba(243, 236, 247, 0) 70%);
         }
 
-        .hero h1 { font-size: clamp(42px, 8vw, 85px); letter-spacing: 8px; margin-bottom: 8px; }
-        .hero p { font-size: 15px; color: var(--ink-muted); letter-spacing: 1px; }
+        .hero h1 { font-size: clamp(48px, 8vw, 90px); letter-spacing: 10px; margin-bottom: 8px; color: var(--ink); }
+        .hero p { font-size: 15px; color: var(--ink-muted); letter-spacing: 1.5px; }
 
         section { padding: 40px 8%; }
         .section-title { text-align: center; margin-bottom: 40px; }
-        .section-title span { color: var(--lilac-accent); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; }
-        .section-title h2 { font-size: 32px; }
+        .section-title span { color: var(--lilac-accent); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
+        .section-title h2 { font-size: 34px; }
 
         .collection-group { margin-bottom: 60px; }
-        .group-header { border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px; margin-bottom: 30px; text-align: center; }
-        .group-header h3 { font-size: 24px; }
+        .group-header { border-bottom: 2px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 35px; text-align: center; }
+        .group-header h3 { font-size: 25px; }
         
         .header-lila h3 { color: var(--lilac-accent); }
         .header-azul h3 { color: var(--blue-accent); }
         .header-verde h3 { color: var(--green-accent); }
 
+        /* Contenedor flexible centrado */
         .collection {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, 270px);
+            display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 35px;
             max-width: 950px;
             margin: auto;
         }
 
-        .product { text-align: center; width: 100%; }
+        /* Medida fija uniforme en todas las pantallas */
+        .product { 
+            text-align: center; 
+            width: 100%; 
+            max-width: 270px; 
+            margin: 0 auto;
+        }
 
         .product-card {
             height: 370px;
@@ -106,18 +123,21 @@
             overflow: hidden;
             border: 1px solid var(--border-subtle);
             margin-bottom: 15px;
+            box-shadow: 0 6px 18px rgba(139, 104, 170, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .product:hover .product-card {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-hover);
         }
 
+        /* Encuadre ajustado para mostrar mejor la pieza sin cortes de cerca */
         .product-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center 25%;
             display: block;
         }
 
@@ -125,7 +145,7 @@
             position: absolute;
             top: 18px;
             right: 18px;
-            background: var(--surface-glass);
+            background: rgba(255, 255, 255, 0.9);
             border: 1px solid var(--border-subtle);
             width: 36px;
             height: 36px;
@@ -137,9 +157,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
         }
 
-        .fav-btn.active { color: #d9534f; border-color: #d9534f; background: #fff; }
+        .fav-btn.active { color: #d9534f; border-color: #d9534f; background: #ffffff; }
+        
         .product h4 { font-size: 19px; font-family: 'Fraunces', serif; margin-top: 5px; }
         .product .price { color: var(--ink); font-weight: 500; font-size: 14px; margin-top: 2px; }
         .product p.subtitle { color: var(--lilac-accent); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
@@ -149,7 +171,7 @@
             align-items: center;
             justify-content: center;
             border: 2px dashed var(--lilac-soft);
-            background: transparent;
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .coming-soon-card p {
@@ -166,22 +188,23 @@
             font-size: 15px;
             line-height: 1.8;
             background: var(--bg-card);
-            padding: 35px 25px;
+            padding: 40px 30px;
             border-radius: 20px;
             border: 1px solid var(--border-subtle);
+            box-shadow: 0 6px 18px rgba(139, 104, 170, 0.06);
         }
 
         footer {
             background-color: var(--ink);
             color: var(--bg-main);
             text-align: center;
-            padding: 40px 20px;
-            margin-top: 50px;
+            padding: 45px 20px;
+            margin-top: 60px;
         }
 
-        footer .logo { font-size: 22px; letter-spacing: 5px; margin-bottom: 6px; }
+        footer .logo { font-size: 22px; letter-spacing: 6px; margin-bottom: 6px; color: #ffffff; }
         footer p { font-size: 11px; color: var(--lilac-soft); letter-spacing: 2px; text-transform: uppercase; }
-        footer .author { margin-top: 4px; font-size: 10px; opacity: 0.8; }
+        footer .author { margin-top: 6px; font-size: 11px; opacity: 0.85; color: #ffffff; }
     </style>
 </head>
 
