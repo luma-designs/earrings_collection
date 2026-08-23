@@ -1,263 +1,244 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMA | Piezas de Autor</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMA - Pendientes Artesanales</title>
+  <style>
+    :root {
+      --bg-color: #fcfaff;
+      --card-bg: #ffffff;
+      --text-color: #2d2a32;
+      --accent-lilac: #b388ff;
+      --accent-blue: #4d90fe;
+      --accent-green: #66bb6a;
+      --shadow: 0 4px 15px rgba(0,0,0,0.06);
+      --radius: 16px;
+    }
 
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        :root {
-            --bg-main: #fbf8fc;
-            --bg-card: #f3ecf7;
-            --bg-card-hover: #eadef2;
-            --surface-glass: rgba(251, 248, 252, 0.95);
-            --ink: #2a2230;
-            --ink-muted: #6e6275;
-            --lilac-accent: #8b68aa;
-            --lilac-soft: #cdb9e3;
-            --border-subtle: rgba(139, 104, 170, 0.15);
-            --shadow-hover: 0 15px 35px rgba(139, 104, 170, 0.15);
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding-bottom: 50px;
+    }
 
-        html { scroll-behavior: smooth; }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
 
-        body {
-            font-family: 'Jost', sans-serif;
-            background-color: var(--bg-main);
-            color: var(--ink);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 4px;
+      color: var(--text-color);
+      margin-bottom: 8px;
+    }
 
-        h1, h2, h3, .logo { font-family: 'Fraunces', serif; font-weight: 300; }
+    header p {
+      font-size: 1.1rem;
+      color: #777;
+    }
 
-        header {
-            min-height: 70px;
-            padding: 15px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--surface-glass);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--border-subtle);
-        }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        .logo-wrap { display: flex; align-items: center; gap: 6px; }
-        .logo { font-size: 24px; letter-spacing: 6px; text-transform: uppercase; }
-        .logo-charm { width: 6px; height: 6px; border-radius: 50%; background-color: var(--lilac-accent); }
+    .section-title {
+      font-size: 1.8rem;
+      margin: 40px 0 20px;
+      padding-bottom: 8px;
+      display: inline-block;
+      border-bottom: 3px solid;
+    }
 
-        nav { display: flex; gap: 20px; }
-        nav a { text-decoration: none; color: var(--ink-muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+    .section-lila .section-title {
+      border-color: var(--accent-lilac);
+    }
 
-        .hero {
-            min-height: 35vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px 20px;
-        }
+    .section-azul .section-title {
+      border-color: var(--accent-blue);
+    }
 
-        .hero h1 { font-size: clamp(42px, 8vw, 85px); letter-spacing: 8px; margin-bottom: 8px; }
-        .hero p { font-size: 15px; color: var(--ink-muted); letter-spacing: 1px; }
+    .section-verde .section-title {
+      border-color: var(--accent-green);
+    }
 
-        section { padding: 40px 8%; }
-        .section-title { text-align: center; margin-bottom: 40px; }
-        .section-title span { color: var(--lilac-accent); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; }
-        .section-title h2 { font-size: 32px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 25px;
+    }
 
-        .collection-group { margin-bottom: 40px; }
-        .group-header { border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px; margin-bottom: 30px; text-align: center; }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-        .collection {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            max-width: 900px;
-            margin: auto;
-        }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
 
-        .product { text-align: center; }
+    .card-img-placeholder {
+      width: 100%;
+      height: 250px;
+      background-color: #f0f0f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 0.9rem;
+      position: relative;
+    }
 
-        .product-card {
-            height: 400px;
-            width: 100%;
-            background: var(--bg-card);
-            border-radius: 180px 180px 20px 20px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border-subtle);
-            margin-bottom: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    .card-img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .product:hover .product-card {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
+    .card-info {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
 
-        .product-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
 
-        .fav-btn {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            background: var(--surface-glass);
-            border: 1px solid var(--border-subtle);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 15px;
-            color: var(--ink-muted);
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .card-price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text-color);
+      margin-top: auto;
+    }
 
-        .fav-btn.active { color: #d9534f; border-color: #d9534f; background: #fff; }
-        .product h4 { font-size: 19px; font-family: 'Fraunces', serif; margin-top: 5px; }
-        .product p { color: var(--lilac-accent); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+    /* Estilo especial para la tarjeta Coming Soon */
+    .card-coming-soon {
+      opacity: 0.7;
+      border: 2px dashed var(--accent-green);
+      background: rgba(255,255,255,0.5);
+    }
 
-        .taller-info {
-            max-width: 650px;
-            margin: 0 auto;
-            text-align: center;
-            color: var(--ink-muted);
-            font-size: 15px;
-            line-height: 1.8;
-            background: var(--bg-card);
-            padding: 35px 25px;
-            border-radius: 20px;
-            border: 1px solid var(--border-subtle);
-        }
-
-        footer {
-            background-color: var(--ink);
-            color: var(--bg-main);
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 50px;
-        }
-
-        footer .logo { font-size: 22px; letter-spacing: 5px; margin-bottom: 6px; }
-        footer p { font-size: 11px; color: var(--lilac-soft); letter-spacing: 2px; text-transform: uppercase; }
-    </style>
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
-
 <body>
 
-    <header>
-        <div class="logo-wrap">
-            <div class="logo">LUMA</div>
-            <div class="logo-charm"></div>
+  <header>
+    <h1>LUMA</h1>
+    <p>Pendientes artesanales hechos a mano con arcilla polimérica</p>
+  </header>
+
+  <main>
+
+    <!-- SECCIÓN LILA -->
+    <section class="section-lila">
+      <h2 class="section-title">Colección Lila</h2>
+      <div class="grid">
+        
+        <div class="card">
+          <div class="card-img-placeholder">
+            <!-- Reemplaza src cuando tengas la foto -->
+            <img src="foto-lila-1.jpg" alt="Pendientes Lila Originales" onerror="this.style.display='none'">
+            <span>Espacio para foto</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Diseño Lila A</h3>
+            <p class="card-price">12,00 €</p>
+          </div>
         </div>
 
-        <nav>
-            <a href="#coleccion">Colección</a>
-            <a href="#taller">El Taller</a>
-        </nav>
-    </header>
+        <div class="card">
+          <div class="card-img-placeholder">
+            <img src="foto-lila-damero.jpg" alt="Pendientes Damero Lila/Azul" onerror="this.style.display='none'">
+            <span>Espacio para foto</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Hexágono Damero Lila</h3>
+            <p class="card-price">12,00 €</p>
+          </div>
+        </div>
 
-    <main>
-        <section class="hero">
-            <h1>LUMA</h1>
-            <p>Piezas únicas hechas a mano en arcilla polimérica.</p>
-        </section>
+      </div>
+    </section>
 
-        <section id="coleccion">
-            <div class="section-title">
-                <span>Catálogo</span>
-                <h2>Primera Edición</h2>
-            </div>
+    <!-- SECCIÓN AZUL -->
+    <section class="section-azul">
+      <h2 class="section-title">Colección Azul</h2>
+      <div class="grid">
 
-            <div class="collection-group">
-                <div class="group-header">
-                    <h3>Colección Violeta & Oro</h3>
-                </div>
+        <div class="card">
+          <div class="card-img-placeholder">
+            <img src="foto-marmol-azul.jpg" alt="Pendientes Marmolados Azules" onerror="this.style.display='none'">
+            <span>Espacio para foto</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Marmolado Rombo & Círculo</h3>
+            <p class="card-price">12,00 €</p>
+          </div>
+        </div>
 
-                <div class="collection">
-                    <!-- Pieza 1: Arco Dúo -->
-                    <div class="product" data-id="1">
-                        <div class="product-card">
-                            <button class="fav-btn" onclick="toggleFav(1)">♥</button>
-                            <img src="IMG_9215.jpg" alt="Arco Dúo" onerror="this.onerror=null; this.src='IMG_9215.JPG';">
-                        </div>
-                        <h4>Arco Dúo</h4>
-                        <p>Pieza Única</p>
-                    </div>
+        <div class="card">
+          <div class="card-img-placeholder">
+            <img src="foto-aros-azul.jpg" alt="Aros Azul Cobalto" onerror="this.style.display='none'">
+            <span>Espacio para foto</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Aros Azul Cobalto</h3>
+            <p class="card-price">12,00 €</p>
+          </div>
+        </div>
 
-                    <!-- Pieza 2: Rombo Mármol -->
-                    <div class="product" data-id="2">
-                        <div class="product-card">
-                            <button class="fav-btn" onclick="toggleFav(2)">♥</button>
-                            <img src="IMG_9216.jpg" alt="Rombo Mármol" onerror="this.onerror=null; this.src='IMG_9216.JPG';">
-                        </div>
-                        <h4>Rombo Mármol</h4>
-                        <p>Pieza Única</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      </div>
+    </section>
 
-        <section id="taller">
-            <div class="section-title">
-                <span>Proceso Artesanal</span>
-                <h2>El Taller</h2>
-            </div>
-            <div class="taller-info">
-                <p>Cada pieza de LUMA es moldeada, cortada y montada minuciosamente a mano. La combinación de tonos lavanda, púrpura y blanco junto con los enganches dorados le da un carácter exclusivo e irrepetible a cada diseño.</p>
-            </div>
-        </section>
-    </main>
+    <!-- SECCIÓN VERDE -->
+    <section class="section-verde">
+      <h2 class="section-title">Colección Verde</h2>
+      <div class="grid">
 
-    <footer>
-        <div class="logo">LUMA</div>
-        <p>Modelado Artesanal</p>
-    </footer>
+        <div class="card card-coming-soon">
+          <div class="card-img-placeholder">
+            <span>Próximamente</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Nuevos diseños en verde</h3>
+            <p class="card-price">--,-- €</p>
+          </div>
+        </div>
 
-    <script>
-        let favorites = JSON.parse(localStorage.getItem('luma_favs')) || [];
+      </div>
+    </section>
 
-        function updateFavUI() {
-            document.querySelectorAll('.product').forEach(el => {
-                const id = parseInt(el.getAttribute('data-id'));
-                const btn = el.querySelector('.fav-btn');
-                if (favorites.includes(id)) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
+  </main>
 
-        function toggleFav(id) {
-            if (favorites.includes(id)) {
-                favorites = favorites.filter(favId => favId !== id);
-            } else {
-                favorites.push(id);
-            }
-            localStorage.setItem('luma_favs', JSON.stringify(favorites));
-            updateFavUI();
-        }
+  <footer>
+    <p>&copy; LUMA - Todos los derechos reservados</p>
+  </footer>
 
-        updateFavUI();
-    </script>
 </body>
 </html>
