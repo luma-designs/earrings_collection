@@ -3,79 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUMA - Pendientes Artesanales</title>
+  <title>LUMA - Taller de Pendientes Artesanales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg-color: #fcfaff;
+      --bg-color: #fcf8ff;
       --card-bg: #ffffff;
-      --text-color: #2d2a32;
-      --accent-lilac: #b388ff;
-      --accent-blue: #4d90fe;
-      --accent-green: #66bb6a;
-      --shadow: 0 4px 15px rgba(0,0,0,0.06);
-      --radius: 16px;
+      --text-main: #332c39;
+      --lilac-accent: #c8b6ff;
+      --lilac-dark: #7b2cbf;
+      --blue-accent: #4a90e2;
+      --green-accent: #7ae0a3;
+      --shadow: 0 8px 24px rgba(123, 44, 191, 0.08);
+      --radius: 18px;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
       background-color: var(--bg-color);
-      color: var(--text-color);
-      padding-bottom: 50px;
+      color: var(--text-main);
+      font-family: 'Poppins', sans-serif;
+      padding-bottom: 60px;
     }
 
     header {
       text-align: center;
-      padding: 40px 20px 20px;
+      padding: 50px 20px 30px;
     }
 
     header h1 {
-      font-size: 3rem;
-      letter-spacing: 4px;
-      color: var(--text-color);
-      margin-bottom: 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      letter-spacing: 6px;
+      color: var(--lilac-dark);
+      margin-bottom: 10px;
     }
 
-    header p {
+    header .subtitle {
+      font-style: italic;
+      color: #6c5ce7;
       font-size: 1.1rem;
-      color: #777;
+      font-family: 'Playfair Display', serif;
     }
 
     main {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 0 20px;
     }
 
-    .section-title {
-      font-size: 1.8rem;
-      margin: 40px 0 20px;
-      padding-bottom: 8px;
-      display: inline-block;
-      border-bottom: 3px solid;
+    .section-header {
+      margin: 45px 0 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
-    .section-lila .section-title {
-      border-color: var(--accent-lilac);
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
     }
 
-    .section-azul .section-title {
-      border-color: var(--accent-blue);
+    .section-header .line {
+      flex-grow: 1;
+      height: 2px;
+      border-radius: 2px;
     }
 
-    .section-verde .section-title {
-      border-color: var(--accent-green);
-    }
+    /* Estilos por categoría */
+    .lila-sec h2 { color: var(--lilac-dark); }
+    .lila-sec .line { background-color: var(--lilac-accent); }
+
+    .azul-sec h2 { color: var(--blue-accent); }
+    .azul-sec .line { background-color: var(--blue-accent); }
+
+    .verde-sec h2 { color: #2e7d32; }
+    .verde-sec .line { background-color: var(--green-accent); }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 30px;
     }
 
     .card {
@@ -85,34 +102,31 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid rgba(200, 182, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(123, 44, 191, 0.15);
     }
 
-    .card-img-placeholder {
+    .card-img-container {
       width: 100%;
-      height: 250px;
-      background-color: #f0f0f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #aaa;
-      font-size: 0.9rem;
+      height: 280px;
+      background-color: #f4effa;
       position: relative;
+      overflow: hidden;
     }
 
-    .card-img-placeholder img {
+    .card-img-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .card-info {
-      padding: 18px;
+    .card-body {
+      padding: 20px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -120,28 +134,37 @@
 
     .card-title {
       font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
+      font-weight: 500;
+      margin-bottom: 10px;
     }
 
     .card-price {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: var(--text-color);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--lilac-dark);
       margin-top: auto;
     }
 
-    /* Estilo especial para la tarjeta Coming Soon */
-    .card-coming-soon {
-      opacity: 0.7;
-      border: 2px dashed var(--accent-green);
-      background: rgba(255,255,255,0.5);
+    /* Formato para tarjeta Próximamente */
+    .coming-soon-card {
+      border: 2px dashed var(--green-accent);
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .coming-soon-box {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
     }
 
     footer {
       text-align: center;
-      margin-top: 60px;
-      color: #aaa;
+      margin-top: 70px;
+      color: #888;
       font-size: 0.9rem;
     }
   </style>
@@ -150,94 +173,99 @@
 
   <header>
     <h1>LUMA</h1>
-    <p>Pendientes artesanales hechos a mano con arcilla polimérica</p>
+    <p class="subtitle">Piezas únicas de arcilla polimérica hechas a mano en el taller</p>
   </header>
 
   <main>
 
     <!-- SECCIÓN LILA -->
-    <section class="section-lila">
-      <h2 class="section-title">Colección Lila</h2>
+    <section>
+      <div class="section-header lila-sec">
+        <h2>Colección Lila</h2>
+        <div class="line"></div>
+      </div>
+      
       <div class="grid">
-        
+        <!-- Foto Original 1 -->
         <div class="card">
-          <div class="card-img-placeholder">
-            <!-- Reemplaza src cuando tengas la foto -->
-            <img src="foto-lila-1.jpg" alt="Pendientes Lila Originales" onerror="this.style.display='none'">
-            <span>Espacio para foto</span>
+          <div class="card-img-container">
+            <img src="IMG_9215.jpg" alt="Pendientes Lilas LUMA">
           </div>
-          <div class="card-info">
-            <h3 class="card-title">Diseño Lila A</h3>
+          <div class="card-info card-body">
+            <h3 class="card-title">Diseño Lila I</h3>
             <p class="card-price">12,00 €</p>
           </div>
         </div>
 
+        <!-- Foto Original 2 -->
         <div class="card">
-          <div class="card-img-placeholder">
-            <img src="foto-lila-damero.jpg" alt="Pendientes Damero Lila/Azul" onerror="this.style.display='none'">
-            <span>Espacio para foto</span>
+          <div class="card-img-container">
+            <img src="IMG_9216.jpg" alt="Pendientes Lilas LUMA">
           </div>
-          <div class="card-info">
+          <div class="card-info card-body">
+            <h3 class="card-title">Diseño Lila II</h3>
+            <p class="card-price">12,00 €</p>
+          </div>
+        </div>
+
+        <!-- Foto Nueva: Hexágonos Damero -->
+        <div class="card">
+          <div class="card-img-container">
+            <img src="IMG_9264.jpg" alt="Hexágonos Damero Lila">
+          </div>
+          <div class="card-info card-body">
             <h3 class="card-title">Hexágono Damero Lila</h3>
             <p class="card-price">12,00 €</p>
           </div>
         </div>
-
       </div>
     </section>
 
     <!-- SECCIÓN AZUL -->
-    <section class="section-azul">
-      <h2 class="section-title">Colección Azul</h2>
-      <div class="grid">
+    <section>
+      <div class="section-header azul-sec">
+        <h2>Colección Azul</h2>
+        <div class="line"></div>
+      </div>
 
+      <div class="grid">
+        <!-- Foto Nueva: Azules Marmolados -->
         <div class="card">
-          <div class="card-img-placeholder">
-            <img src="foto-marmol-azul.jpg" alt="Pendientes Marmolados Azules" onerror="this.style.display='none'">
-            <span>Espacio para foto</span>
+          <div class="card-img-container">
+            <img src="IMG_9265.jpg" alt="Marmolado Azul">
           </div>
-          <div class="card-info">
+          <div class="card-info card-body">
             <h3 class="card-title">Marmolado Rombo & Círculo</h3>
             <p class="card-price">12,00 €</p>
           </div>
         </div>
-
-        <div class="card">
-          <div class="card-img-placeholder">
-            <img src="foto-aros-azul.jpg" alt="Aros Azul Cobalto" onerror="this.style.display='none'">
-            <span>Espacio para foto</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Aros Azul Cobalto</h3>
-            <p class="card-price">12,00 €</p>
-          </div>
-        </div>
-
       </div>
     </section>
 
     <!-- SECCIÓN VERDE -->
-    <section class="section-verde">
-      <h2 class="section-title">Colección Verde</h2>
-      <div class="grid">
+    <section>
+      <div class="section-header verde-sec">
+        <h2>Colección Verde</h2>
+        <div class="line"></div>
+      </div>
 
-        <div class="card card-coming-soon">
-          <div class="card-img-placeholder">
-            <span>Próximamente</span>
+      <div class="grid">
+        <div class="card coming-soon-card">
+          <div class="card-img-container">
+            <div class="coming-soon-box">Próximamente...</div>
           </div>
-          <div class="card-info">
-            <h3 class="card-title">Nuevos diseños en verde</h3>
-            <p class="card-price">--,-- €</p>
+          <div class="card-info card-body">
+            <h3 class="card-title">Nuevas piezas en proceso</h3>
+            <p class="card-price" style="color: #888;">--,-- €</p>
           </div>
         </div>
-
       </div>
     </section>
 
   </main>
 
   <footer>
-    <p>&copy; LUMA - Todos los derechos reservados</p>
+    <p>&copy; LUMA - Taller Artesanal</p>
   </footer>
 
 </body>
