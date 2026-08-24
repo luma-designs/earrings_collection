@@ -56,7 +56,7 @@
         .logo { font-size: 24px; letter-spacing: 6px; text-transform: uppercase; color: #ffffff; }
         .logo-charm { width: 6px; height: 6px; border-radius: 50%; background-color: var(--lilac-soft); }
 
-        nav { display: flex; gap: 24px; }
+        nav { display: flex; gap: 24px; align-items: center; }
         nav a { 
             text-decoration: none; 
             color: #e5dbe9; 
@@ -64,8 +64,21 @@
             letter-spacing: 2px; 
             text-transform: uppercase;
             transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         nav a:hover { color: #ffffff; }
+
+        .fav-count-badge {
+            background: #d9534f;
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 500;
+            display: none;
+        }
 
         .hero {
             min-height: 38vh;
@@ -92,6 +105,9 @@
         
         .header-lila h3 { color: var(--lilac-accent); }
         .header-azul h3 { color: var(--blue-accent); }
+        .header-fav h3 { color: #d9534f; }
+
+        #fav-section { display: none; } /* Se activa dinámicamente con JS */
 
         .collection {
             display: flex;
@@ -135,11 +151,11 @@
             display: block;
         }
 
-        /* Botón de favoritos siempre visible */
+        /* Corazón centrado dentro de la curva para que no se corte */
         .fav-btn {
             position: absolute;
-            top: 18px;
-            right: 18px;
+            top: 25px;
+            right: 25px;
             background: #ffffff;
             border: 1px solid rgba(42, 34, 48, 0.15);
             width: 38px;
@@ -208,6 +224,7 @@
 
         <nav>
             <a href="#coleccion">Colección</a>
+            <a href="#fav-section" id="nav-fav">Mis Favoritos <span class="fav-count-badge" id="fav-badge">0</span></a>
             <a href="#taller">El Taller</a>
         </nav>
     </header>
@@ -219,6 +236,14 @@
         </section>
 
         <section id="coleccion">
+            <!-- SECCIÓN FAVORITOS (SOLO SE MUESTRA SI HAY FAVORITOS) -->
+            <div id="fav-section" class="collection-group">
+                <div class="group-header header-fav">
+                    <h3>Mis Favoritos ♥</h3>
+                </div>
+                <div class="collection" id="fav-container"></div>
+            </div>
+
             <div class="section-title">
                 <span>Catálogo</span>
                 <h2>Colecciones</h2>
@@ -309,6 +334,7 @@
         let favorites = JSON.parse(localStorage.getItem('luma_favs')) || [];
 
         function updateFavUI() {
+            // Actualizar estado de los botones de corazón
             document.querySelectorAll('.product').forEach(el => {
                 const id = parseInt(el.getAttribute('data-id'));
                 const btn = el.querySelector('.fav-btn');
@@ -318,6 +344,33 @@
                     btn.classList.remove('active');
                 }
             });
+
+            // Actualizar badge del menú
+            const badge = document.getElementById('fav-badge');
+            if (favorites.length > 0) {
+                badge.innerText = favorites.length;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+
+            // Renderizar la sección de Favoritos
+            const favSection = document.getElementById('fav-section');
+            const favContainer = document.getElementById('fav-container');
+            favContainer.innerHTML = '';
+
+            if (favorites.length > 0) {
+                favSection.style.display = 'block';
+                favorites.forEach(id => {
+                    const originalProduct = document.querySelector(`.collection-group:not(#fav-section) .product[data-id="${id}"]`);
+                    if (originalProduct) {
+                        const clone = originalProduct.cloneNode(true);
+                        favContainer.appendChild(clone);
+                    }
+                });
+            } else {
+                favSection.style.display = 'none';
+            }
         }
 
         function toggleFav(id) {
